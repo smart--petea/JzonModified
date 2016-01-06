@@ -343,28 +343,28 @@ namespace Jzon
 	{
 		return data != NULL ? data->children.size() : 0;
 	}
-	Node Node::get(const std::string &name) const
+	Node* Node::get(const std::string &name)
 	{
 		if (isObject())
 		{
 			NamedNodeList &children = data->children;
-			for (NamedNodeList::const_iterator it = children.begin(); it != children.end(); ++it)
+			for (NamedNodeList::iterator it = children.begin(); it != children.end(); ++it)
 			{
 				if ((*it).first == name)
 				{
-					return (*it).second;
+					return &((*it).second);
 				}
 			}
 		}
-		return Node(T_INVALID);
+		return NULL;
 	}
-	Node Node::get(size_t index) const
+	Node* Node::get(size_t index)
 	{
 		if (isContainer() && index < data->children.size())
 		{
-			return data->children.at(index).second;
+			return &(data->children.at(index).second);
 		}
-		return Node(T_INVALID);
+		return NULL;
 	}
 
 	Node::iterator Node::begin()
