@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include <queue>
 #include <iterator>
 #include <istream>
+#include <iostream>
 #include <ostream>
 
 #ifndef JZON_API
@@ -183,6 +184,9 @@ namespace Jzon
 		size_t getCount() const;
 		Node* get(const std::string &name);
 		Node* get(size_t index);
+
+		Node get(const std::string &name) const;
+		Node get(size_t index) const;
 
 		iterator begin();
 		const_iterator begin() const;
