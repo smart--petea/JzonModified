@@ -343,7 +343,7 @@ namespace Jzon
 	{
 		return data != NULL ? data->children.size() : 0;
 	}
-	Node* Node::get(const std::string &name)
+	Node* Node::getByRef(const std::string &name)
 	{
 		if (isObject())
 		{
@@ -358,7 +358,7 @@ namespace Jzon
 		}
 		return NULL;
 	}
-	Node* Node::get(size_t index)
+	Node* Node::getByRef(size_t index)
 	{
 		if (isContainer() && index < data->children.size())
 		{

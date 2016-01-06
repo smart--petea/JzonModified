@@ -182,8 +182,8 @@ namespace Jzon
 
 		bool has(const std::string &name) const;
 		size_t getCount() const;
-		Node* get(const std::string &name);
-		Node* get(size_t index);
+		Node* getByRef(const std::string &name);
+		Node* getByRef(size_t index);
 
 		Node get(const std::string &name) const;
 		Node get(size_t index) const;
