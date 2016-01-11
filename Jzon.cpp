@@ -343,8 +343,56 @@ namespace Jzon
 	{
 		return data != NULL ? data->children.size() : 0;
 	}
-	Node* Node::getByRef(const std::string &name)
+
+    const Node* Node::getByRef(const char* name) const
+    {
+        std::string nameStr(name);
+        return getByRef_(nameStr);
+    }
+
+	const Node* Node::getByRef(const std::string &name) const
+    {
+        return getByRef_(name);
+    }
+
+	const Node* Node::getByRef_(const std::string &name) const
+    {
+		if (isObject())
+		{
+			NamedNodeList &children = data->children;
+			for (NamedNodeList::const_iterator it = children.begin(); it != children.end(); ++it)
+			{
+				if ((*it).first == name)
+				{
+					return &((*it).second);
+				}
+			}
+		}
+		return NULL;
+    }
+
+	const Node* Node::getByRef(size_t index) const
 	{
+		if (isContainer() && index < data->children.size())
+		{
+			return &(data->children.at(index).second);
+		}
+		return NULL;
+	}
+
+
+    Node* Node::getByRef(std::string name)
+    {
+        return getByRef_(name);
+    }
+
+	Node* Node::getByRef(const std::string &name)
+    {
+        return getByRef_(name);
+    }
+
+	Node* Node::getByRef_(const std::string &name)
+    {
 		if (isObject())
 		{
 			NamedNodeList &children = data->children;
@@ -357,7 +405,8 @@ namespace Jzon
 			}
 		}
 		return NULL;
-	}
+    }
+
 	Node* Node::getByRef(size_t index)
 	{
 		if (isContainer() && index < data->children.size())
