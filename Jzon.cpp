@@ -435,7 +435,7 @@ namespace Jzon
 	{
 		if (isContainer() && index < data->children.size())
 		{
-			return &(data->children.at(index).second);
+			return data->children.at(index).second;
 		}
 		return Node(Node::T_INVALID);
 	}
