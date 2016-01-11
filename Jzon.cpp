@@ -88,7 +88,6 @@ namespace Jzon
 	}
 	Node::Node(const Node &other) : data(other.data)
 	{
-        std::cout << "Node(const Node &other)" << std::endl;
 		if (data != NULL)
 		{
 			data->addRef();
