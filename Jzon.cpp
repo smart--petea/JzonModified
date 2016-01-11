@@ -88,6 +88,7 @@ namespace Jzon
 	}
 	Node::Node(const Node &other) : data(other.data)
 	{
+        std::cout << "Node(const Node &other)" << std::endl;
 		if (data != NULL)
 		{
 			data->addRef();
@@ -278,6 +279,9 @@ namespace Jzon
 	{
 		if (isObject())
 		{
+            const Node* ptr = getByRef_(name);
+            if(ptr) remove(name);
+
 			detach();
 			data->children.push_back(std::make_pair(name, node));
 		}
@@ -435,7 +439,7 @@ namespace Jzon
 	{
 		if (isContainer() && index < data->children.size())
 		{
-			return &(data->children.at(index).second);
+			return data->children.at(index).second;
 		}
 		return Node(Node::T_INVALID);
 	}
