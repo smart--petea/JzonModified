@@ -144,12 +144,15 @@ namespace Jzon
 		}
 	}
 #define GET_NUMBER(T) \
-	if (isNumber())\
+	if (isValue())\
 	{\
-		std::stringstream sstr(data->valueStr);\
-		T val;\
+        std::size_t firstW = data->valueStr.find_first_not_of(' ');\
+        std::size_t lastW = data->valueStr.find_last_not_of(' ');\
+		std::stringstream sstr(data->valueStr.substr(firstW, (lastW - firstW + 1)));\
+		double val;\
 		sstr >> val;\
-		return val;\
+        if(sstr.fail()) return def;\
+        return sstr.rdbuf()->in_avail() ? def : val;\
 	}\
 	else\
 	{\
