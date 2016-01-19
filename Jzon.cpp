@@ -152,7 +152,7 @@ namespace Jzon
 		double val;\
 		sstr >> val;\
         if(sstr.fail()) return def;\
-        return sstr.rdbuf()->in_avail() ? def : val;\
+        return sstr.str().empty() ? val : def;\
 	}\
 	else\
 	{\
