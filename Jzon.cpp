@@ -148,11 +148,11 @@ namespace Jzon
 	{\
         std::size_t firstW = data->valueStr.find_first_not_of(' ');\
         std::size_t lastW = data->valueStr.find_last_not_of(' ');\
+        if(firstW == std::string::npos || lastW == std::string::npos) return def; \
 		std::stringstream sstr(data->valueStr.substr(firstW, (lastW - firstW + 1)));\
 		double val;\
 		sstr >> val;\
-        if(sstr.fail()) return def;\
-        return sstr.str().empty() ? val : def;\
+        return (sstr.rdstate() == std::istringstream::eofbit) ? val : def;\
 	}\
 	else\
 	{\
